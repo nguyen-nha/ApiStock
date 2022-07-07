@@ -12,3 +12,11 @@ def getStockInfo(request):
     stock_serializer = StockSerializer(stock_info, many=True)
 
     return Response(stock_serializer.data)
+@api_view['POST']
+def addStock(request):
+    data = request.data
+    serializer = StockSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return
+
